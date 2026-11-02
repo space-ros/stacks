@@ -30,8 +30,12 @@ jobs:
           filters: |
             moveit2:
               - 'moveit2/**'
+              - '.github/workflows/ci.yml'
+              - '.github/workflows/moveit2-build.yml'
             nav2:
               - 'navigation2/**'
+              - '.github/workflows/ci.yml'
+              - '.github/workflows/nav2-build.yml'
 
   markdown-link-check:
     name: Markdown Link Check
