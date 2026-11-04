@@ -110,6 +110,10 @@ RUN rosinstall_generator \
     -- $(cat /tmp/moveit2-pkgs.txt) \
     > ${MOVEIT2_DIR}/moveit2_generated_pkgs.repos
 
+# shortcut: pin ros2_control to 4.49.0, because 4.50.0 breaks the ros2_controllers 4.43.0 test build (#299).
+# Remove once a ros2_controllers jazzy release includes ros-controls/ros2_controllers#2710 (#301).
+RUN sed -i '/ros2_control-release/{n;s#/4\.50\.0-1$#/4.49.0-1#}' ${MOVEIT2_DIR}/moveit2_generated_pkgs.repos
+
 # Get the repositories required by MoveIt2, but not included in Space ROS
 WORKDIR ${MOVEIT2_DIR}
 RUN vcs import --shallow src < ${MOVEIT2_DIR}/moveit2_generated_pkgs.repos
